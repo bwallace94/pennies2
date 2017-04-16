@@ -1,0 +1,6 @@
+framework module Pods_Pennies {
+  umbrella header "Pods-Pennies-umbrella.h"
+
+  export *
+  module * { export * }
+}
