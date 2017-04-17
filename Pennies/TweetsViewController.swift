@@ -8,22 +8,36 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController {
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var tweets: [Tweet]!
+    var tweets: [Tweet]! = []
 
+    @IBOutlet weak var tableView: UITableView!
+    
     @IBAction func onSignOutButton(_ sender: Any) {
         TwitterClient.sharedInstance.logout()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
+        cell.tweetInfo = tweets[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tweets.count
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         TwitterClient.sharedInstance.homeTimeline(success: { (tweets: [Tweet]) -> () in
             self.tweets = tweets
-            //tableView.reloadData()
+            self.tableView.reloadData()
         }, failure: { (error: Error) -> () in
             print(error.localizedDescription)
         })
+        tableView.delegate = self
+        tableView.dataSource = self
         TwitterClient.sharedInstance.currentAccount(success: { (user: User) in
             //TODO
         }) { (error: Error) in
