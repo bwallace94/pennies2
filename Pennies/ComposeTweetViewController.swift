@@ -17,6 +17,11 @@ class ComposeTweetViewController: UIViewController {
     }
     
     @IBAction func onTweetButton(_ sender: Any) {
+        TwitterClient.sharedInstance.sendTweet(text: newTweetTextView.text, success: { 
+            print("TWEET POSTED")
+        }) { (error: Error) in
+            print(error.localizedDescription)
+        }
         dismiss(animated: true, completion: nil)
     }
     
