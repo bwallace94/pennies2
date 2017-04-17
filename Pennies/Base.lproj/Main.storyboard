@@ -150,7 +150,7 @@
                         <barButtonItem key="rightBarButtonItem" title="New" id="COO-9O-1PB">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="iU6-8E-M7W" kind="presentation" identifier="newTweetSegue" id="GJL-4c-J3o"/>
+                                <segue destination="iU6-8E-M7W" kind="presentation" identifier="newTweetSegue" id="RKK-9C-l2C"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -360,7 +360,7 @@
         <!--Compose Tweet View Controller-->
         <scene sceneID="u8e-qg-oWH">
             <objects>
-                <viewController id="ORh-yB-jbK" customClass="ComposeTweetViewController" customModule="Pennies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ComposeTweetViewController" id="ORh-yB-jbK" customClass="ComposeTweetViewController" customModule="Pennies" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kQr-yW-AMP"/>
                         <viewControllerLayoutGuide type="bottom" id="2Dl-4e-Wei"/>
@@ -430,14 +430,14 @@
                         <barButtonItem key="rightBarButtonItem" title="Tweet" id="JFs-pl-O7y">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="onTweetButton:" destination="ORh-yB-jbK" id="TXz-aR-D2R"/>
+                                <action selector="onTweetButton:" destination="ORh-yB-jbK" id="V09-Pg-MVu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="charactersRemaining" destination="Ehb-f1-sft" id="6bF-i1-Ztl"/>
                         <outlet property="newTweetTextView" destination="nbt-cp-lsh" id="XQT-SY-OMN"/>
-                        <outlet property="onTweetButton" destination="JFs-pl-O7y" id="mn9-wl-n5a"/>
+                        <outlet property="onTweetButton" destination="JFs-pl-O7y" id="Aco-pm-9NM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dct-D3-VI2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -447,9 +447,9 @@
         <!--Navigation Controller-->
         <scene sceneID="x2i-jH-2GP">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iU6-8E-M7W" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ComposeTweetNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="iU6-8E-M7W" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="5aT-ai-pGf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="5aT-ai-pGf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.1137254902" green="0.79215686269999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

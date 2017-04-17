@@ -73,11 +73,13 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
-    func sendTweet(text: String!, success: @escaping () -> (), failure: @escaping (Error) -> ()) {
+    func sendTweet(text: String!, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()) {
         var parameters = [String: String]()
         parameters["status"] = text
         post("1.1/statuses/update.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
-            success()
+            let dictionary = response as! NSDictionary
+            let tweet = Tweet(dict: dictionary)
+            success(tweet)
         }) { (task: URLSessionDataTask?, error: Error) in
             print("ERROR SENDING TWEET")
             failure(error)

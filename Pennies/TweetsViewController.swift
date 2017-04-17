@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeTweetProtocol {
     
     var tweets: [Tweet]! = []
 
@@ -39,6 +39,12 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         })
     }
     
+    func addNewTweet(tweet newTweet: Tweet) {
+        tweets = [newTweet] + tweets
+        print("HERE2")
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let refreshControl = UIRefreshControl()
@@ -64,6 +70,12 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let indexPath = tableView.indexPath(for: sender as! TweetCell)!
             let vc = segue.destination as! TweetDetailsViewController
             vc.tweetInfo = tweets[indexPath.row]
+        }
+        if segue.identifier == "newTweetSegue" {
+            let navController = segue.destination as! UINavigationController
+            let vc = navController.childViewControllers.first as! ComposeTweetViewController
+            vc.delegate = self
+            
         }
     }
 

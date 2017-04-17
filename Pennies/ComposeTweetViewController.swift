@@ -8,31 +8,33 @@
 
 import UIKit
 
+protocol ComposeTweetProtocol {
+    func addNewTweet(tweet: Tweet)
+}
+
 class ComposeTweetViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var newTweetTextView: UITextView!
     @IBOutlet weak var charactersRemaining: UILabel!
     @IBOutlet weak var onTweetButton: UIBarButtonItem!
     
+    var delegate: ComposeTweetProtocol? = nil
+    var newTweet: Tweet?
+    
     @IBAction func onCancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func onTweetButton(_ sender: Any) {
-        TwitterClient.sharedInstance.sendTweet(text: newTweetTextView.text, success: { 
-            print("TWEET POSTED")
+        TwitterClient.sharedInstance.sendTweet(text: newTweetTextView.text, success: { (newTweet: Tweet) -> () in
+            self.newTweet = newTweet
+            print("HERE")
+            self.delegate?.addNewTweet(tweet: self.newTweet!)
         }) { (error: Error) in
             print(error.localizedDescription)
         }
         dismiss(animated: true, completion: nil)
     }
-    
-//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-//        if textView.text.characters.count == 140 && !(text != "") {
-//            return false
-//        }
-//        return true
-//    }
     
     func textViewDidChange(_ textView: UITextView) {
         let length = textView.text.characters.count
