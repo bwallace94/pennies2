@@ -44,6 +44,15 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             print(error.localizedDescription)
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "DetailsSegue" {
+            let indexPath = tableView.indexPath(for: sender as! TweetCell)!
+            let vc = segue.destination as! TweetDetailsViewController
+            print("HERE")
+            vc.tweetInfo = tweets[indexPath.row]
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

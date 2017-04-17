@@ -30,7 +30,7 @@ class Tweet: NSObject {
         }
         text = dict["text"] as? String
         retweetCount = (dict["retweet_count"] as? Int) ?? 0
-        favoriteCount = (dict["favourites_count"] as? Int) ?? 0
+        favoriteCount = (dict["favourite_count"] as? Int) ?? 0
         let timestampString = dict["created_at"] as? String
         if let timestampString = timestampString {
             let formatter = DateFormatter()
