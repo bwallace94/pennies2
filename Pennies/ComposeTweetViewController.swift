@@ -8,9 +8,11 @@
 
 import UIKit
 
-class ComposeTweetViewController: UIViewController {
+class ComposeTweetViewController: UIViewController, UITextViewDelegate {
     
     @IBOutlet weak var newTweetTextView: UITextView!
+    @IBOutlet weak var charactersRemaining: UILabel!
+    @IBOutlet weak var onTweetButton: UIBarButtonItem!
     
     @IBAction func onCancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -25,8 +27,29 @@ class ComposeTweetViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+//    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+//        if textView.text.characters.count == 140 && !(text != "") {
+//            return false
+//        }
+//        return true
+//    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let length = textView.text.characters.count
+        let remaining = 140 - length
+        charactersRemaining.text = "\(remaining)"
+        if length > 140 {
+            charactersRemaining.textColor = UIColor.red
+            onTweetButton.isEnabled = false
+        } else {
+            charactersRemaining.textColor = UIColor.gray
+            onTweetButton.isEnabled = true
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        newTweetTextView.delegate = self
         newTweetTextView.becomeFirstResponder()
         // Do any additional setup after loading the view.
     }

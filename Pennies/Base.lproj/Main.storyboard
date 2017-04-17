@@ -382,6 +382,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="briawallace94" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N5P-RL-QMu">
+                                <rect key="frame" x="76" y="49" width="78" height="15"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nbt-cp-lsh">
                                 <rect key="frame" x="16" y="103" width="343" height="225"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -389,21 +395,23 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="briawallace94" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N5P-RL-QMu">
-                                <rect key="frame" x="76" y="49" width="78" height="15"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ehb-f1-sft">
+                                <rect key="frame" x="338" y="24" width="29" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="R7O-rk-3Q9" firstAttribute="leading" secondItem="0KW-IV-t9Z" secondAttribute="trailing" constant="8" id="8D1-L3-47Q"/>
+                            <constraint firstItem="Ehb-f1-sft" firstAttribute="top" secondItem="kQr-yW-AMP" secondAttribute="bottom" constant="24" id="Hbj-Z7-eOL"/>
                             <constraint firstItem="N5P-RL-QMu" firstAttribute="leading" secondItem="0KW-IV-t9Z" secondAttribute="trailing" constant="8" id="TYJ-4V-cqC"/>
                             <constraint firstItem="N5P-RL-QMu" firstAttribute="top" secondItem="R7O-rk-3Q9" secondAttribute="bottom" constant="4" id="W4d-zK-uO0"/>
                             <constraint firstItem="R7O-rk-3Q9" firstAttribute="top" secondItem="0KW-IV-t9Z" secondAttribute="top" constant="4" id="hoQ-OL-nsR"/>
                             <constraint firstItem="0KW-IV-t9Z" firstAttribute="leading" secondItem="vE4-a5-rPX" secondAttribute="leading" constant="8" id="s6n-k8-y9y"/>
                             <constraint firstItem="0KW-IV-t9Z" firstAttribute="top" secondItem="kQr-yW-AMP" secondAttribute="bottom" constant="24" id="xYF-NJ-5UR"/>
+                            <constraint firstAttribute="trailing" secondItem="Ehb-f1-sft" secondAttribute="trailing" constant="8" id="zWN-o2-3iP"/>
                         </constraints>
                         <connections>
                             <outlet property="newTweetTextView" destination="nbt-cp-lsh" id="NZB-os-f1l"/>
@@ -427,7 +435,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="charactersRemaining" destination="Ehb-f1-sft" id="6bF-i1-Ztl"/>
                         <outlet property="newTweetTextView" destination="nbt-cp-lsh" id="XQT-SY-OMN"/>
+                        <outlet property="onTweetButton" destination="JFs-pl-O7y" id="mn9-wl-n5a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dct-D3-VI2" userLabel="First Responder" sceneMemberID="firstResponder"/>
