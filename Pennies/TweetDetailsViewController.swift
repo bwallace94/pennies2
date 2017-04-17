@@ -20,6 +20,7 @@ class TweetDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         sendTweetView(tweet: tweetInfo)
     }
 

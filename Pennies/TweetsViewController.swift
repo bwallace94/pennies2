@@ -28,8 +28,22 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return tweets.count
     }
     
+    func refreshControlAction(_refreshControl: UIRefreshControl) {
+        TwitterClient.sharedInstance.homeTimeline(success: { (tweets: [Tweet]) -> () in
+            self.tweets = tweets
+            _refreshControl.endRefreshing()
+            self.tableView.reloadData()
+        }, failure: { (error: Error) -> () in
+            print(error.localizedDescription)
+            _refreshControl.endRefreshing()
+        })
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlAction(_refreshControl:)), for: UIControlEvents.valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
         TwitterClient.sharedInstance.homeTimeline(success: { (tweets: [Tweet]) -> () in
             self.tweets = tweets
             self.tableView.reloadData()
@@ -49,7 +63,6 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if segue.identifier == "DetailsSegue" {
             let indexPath = tableView.indexPath(for: sender as! TweetCell)!
             let vc = segue.destination as! TweetDetailsViewController
-            print("HERE")
             vc.tweetInfo = tweets[indexPath.row]
         }
     }
