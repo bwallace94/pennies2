@@ -12,6 +12,10 @@ class TweetsViewController: UIViewController {
     
     var tweets: [Tweet]!
 
+    @IBAction func onSignOutButton(_ sender: Any) {
+        TwitterClient.sharedInstance.logout()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         TwitterClient.sharedInstance.homeTimeline(success: { (tweets: [Tweet]) -> () in
@@ -20,7 +24,11 @@ class TweetsViewController: UIViewController {
         }, failure: { (error: Error) -> () in
             print(error.localizedDescription)
         })
-        TwitterClient.sharedInstance.currentAccount()
+        TwitterClient.sharedInstance.currentAccount(success: { (user: User) in
+            //TODO
+        }) { (error: Error) in
+            print(error.localizedDescription)
+        }
     }
 
     override func didReceiveMemoryWarning() {

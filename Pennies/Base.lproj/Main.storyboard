@@ -78,7 +78,13 @@
                             <constraint firstItem="md9-b5-kc4" firstAttribute="leading" secondItem="Zi7-Zy-bfI" secondAttribute="leading" id="nuo-c8-Tag"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="DZN-Ts-CxH"/>
+                    <navigationItem key="navigationItem" id="DZN-Ts-CxH">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="7R0-f0-jd3">
+                            <connections>
+                                <action selector="onSignOutButton:" destination="X0a-bI-RhD" id="Kn1-jI-EHo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="own-Yu-iag" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -87,7 +93,7 @@
         <!--Navigation Controller-->
         <scene sceneID="fzH-PX-wba">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="qSz-m2-yTz" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="tweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="qSz-m2-yTz" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rX0-rg-LS7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
