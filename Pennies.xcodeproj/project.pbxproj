@@ -21,6 +21,7 @@
 		C9A4C0FA1EA45299006999EE /* TweetDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A4C0F91EA45299006999EE /* TweetDetailsViewController.swift */; };
 		C9A4C0FC1EA457C2006999EE /* TweetDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A4C0FB1EA457C2006999EE /* TweetDetails.swift */; };
 		C9A4C0FE1EA45D2C006999EE /* ComposeTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A4C0FD1EA45D2C006999EE /* ComposeTweetViewController.swift */; };
+		C9A4C1021EA47635006999EE /* ComposeTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9A4C1011EA47635006999EE /* ComposeTweet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		C9A4C0F91EA45299006999EE /* TweetDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetailsViewController.swift; sourceTree = "<group>"; };
 		C9A4C0FB1EA457C2006999EE /* TweetDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetDetails.swift; sourceTree = "<group>"; };
 		C9A4C0FD1EA45D2C006999EE /* ComposeTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeTweetViewController.swift; sourceTree = "<group>"; };
+		C9A4C1011EA47635006999EE /* ComposeTweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComposeTweet.swift; sourceTree = "<group>"; };
 		EEEFF7A6E587C783A919A62A /* Pods-Pennies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pennies.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pennies/Pods-Pennies.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +125,7 @@
 			children = (
 				C9A4C0F71EA4497D006999EE /* TweetCell.swift */,
 				C9A4C0FB1EA457C2006999EE /* TweetDetails.swift */,
+				C9A4C1011EA47635006999EE /* ComposeTweet.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				C9A4C0FC1EA457C2006999EE /* TweetDetails.swift in Sources */,
 				C9A4C0ED1EA33919006999EE /* LoginViewController.swift in Sources */,
 				C9A4C0F61EA42A84006999EE /* TweetsViewController.swift in Sources */,
+				C9A4C1021EA47635006999EE /* ComposeTweet.swift in Sources */,
 				C9A4C0D81E9EC9C2006999EE /* AppDelegate.swift in Sources */,
 				C9A4C0F01EA36518006999EE /* User.swift in Sources */,
 				C9A4C0F21EA36525006999EE /* Tweet.swift in Sources */,

@@ -9,10 +9,20 @@
 import UIKit
 
 class ComposeTweetViewController: UIViewController {
-
+    
+    @IBOutlet weak var newTweetTextView: UITextView!
+    
+    @IBAction func onCancelButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func onTweetButton(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        newTweetTextView.becomeFirstResponder()
         // Do any additional setup after loading the view.
     }
 

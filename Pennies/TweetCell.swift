@@ -25,7 +25,9 @@ class TweetCell: UITableViewCell {
             if let url = tweetInfo.profilePictureUrl {
                 userProfilePictureImageView.setImageWith(url)
             }
-            // timestampLabel.text = tweetInfo.timestamp.
+            let formatter = DateFormatter()
+            formatter.dateFormat = "h:mm a"
+            timestampLabel.text = formatter.string(from: tweetInfo.timestamp!)
         }
     }
     
@@ -36,8 +38,7 @@ class TweetCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-
 }
+
+

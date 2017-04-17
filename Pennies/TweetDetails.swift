@@ -26,6 +26,9 @@ class TweetDetails: UIView {
             userScreennameLabel.text = tweetDetails.screenname
             retweetNumberLabel.text = ("\(tweetDetails.retweetCount)")
             favoritesNumberLabel.text = ("\(tweetDetails.favoriteCount)")
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM/dd/yyyy, hh:mm a"
+            timestampLabel.text = formatter.string(from: tweetDetails.timestamp!)
         }
     }
 }
