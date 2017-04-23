@@ -85,4 +85,42 @@ class TwitterClient: BDBOAuth1SessionManager {
             failure(error)
         }
     }
+    
+    func favoriteTweet(tweetID: String!, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()) {
+        var parameters = [String: String]()
+        parameters["id"] = tweetID
+        post("1.1/favorites/create.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            let dictionary = response as! NSDictionary
+            let tweet = Tweet(dict: dictionary)
+            success(tweet)
+        }) { (task: URLSessionDataTask?, error: Error) in
+            print("ERROR FAVORITING TWEET")
+            failure(error)
+        }
+    }
+    
+    func unfavoriteTweet(tweetID: String!, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()) {
+        var parameters = [String: String]()
+        parameters["id"] = tweetID
+        post("1.1/favorites/destroy.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            let dictionary = response as! NSDictionary
+            let tweet = Tweet(dict: dictionary)
+            success(tweet)
+        }) { (task: URLSessionDataTask?, error: Error) in
+            print("ERROR UNFAVORITING TWEET")
+            failure(error)
+        }
+    }
+    
+    func retweetTweet(tweetID: String!, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()) {
+        let urlString = "1.1/statuses/retweet/\(tweetID!).json"
+        post(urlString, parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            let dictionary = response as! NSDictionary
+            let tweet = Tweet(dict: dictionary)
+            success(tweet)
+        }) { (task: URLSessionDataTask?, error: Error) in
+            print("ERROR RETWEETING")
+            failure(error)
+        }
+    }
 }

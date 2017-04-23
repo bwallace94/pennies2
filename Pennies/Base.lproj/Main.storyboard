@@ -257,6 +257,9 @@
                                     <constraint firstAttribute="height" constant="24" id="xjJ-de-p1Y"/>
                                 </constraints>
                                 <state key="normal" title="1" image="reply-action_0"/>
+                                <connections>
+                                    <action selector="onReplyButton:" destination="p3f-qv-khb" eventType="touchUpInside" id="FE0-HV-ddg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWo-Y8-0TE">
                                 <rect key="frame" x="104" y="178" width="24" height="24"/>
@@ -265,6 +268,9 @@
                                     <constraint firstAttribute="height" constant="24" id="muN-5P-b1y"/>
                                 </constraints>
                                 <state key="normal" title="2" image="retweet-action"/>
+                                <connections>
+                                    <action selector="onRetweetButton:" destination="p3f-qv-khb" eventType="touchUpInside" id="Zik-JI-Ir3"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Rx-OB-ysU">
                                 <rect key="frame" x="176" y="178" width="24" height="24"/>
@@ -273,6 +279,9 @@
                                     <constraint firstAttribute="width" constant="24" id="yDu-nV-2Z9"/>
                                 </constraints>
                                 <state key="normal" title="3" image="like-action"/>
+                                <connections>
+                                    <action selector="onFavoriteButton:" destination="p3f-qv-khb" eventType="touchUpInside" id="2AL-NA-Wli"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -326,6 +335,9 @@
                     <toolbarItems/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="favoriteButton" destination="6Rx-OB-ysU" id="5aM-qW-hEN"/>
+                        <outlet property="replyButton" destination="haL-KJ-l3X" id="XCS-TL-1jQ"/>
+                        <outlet property="retweetButton" destination="eWo-Y8-0TE" id="KCM-Lz-nAv"/>
                         <outlet property="tweetView" destination="hhs-jF-BJV" id="wx4-fV-Z95"/>
                     </connections>
                 </viewController>
@@ -338,7 +350,7 @@
             <objects>
                 <navigationController storyboardIdentifier="tweetsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="qSz-m2-yTz" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="rX0-rg-LS7">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="rX0-rg-LS7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.1137254902" green="0.79215686269999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
