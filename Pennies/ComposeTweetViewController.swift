@@ -14,6 +14,7 @@ protocol ComposeTweetProtocol {
 
 class ComposeTweetViewController: UIViewController, UITextViewDelegate {
     
+    @IBOutlet var newTweetView: ComposeTweet!
     @IBOutlet weak var newTweetTextView: UITextView!
     @IBOutlet weak var charactersRemaining: UILabel!
     @IBOutlet weak var onTweetButton: UIBarButtonItem!
@@ -28,7 +29,6 @@ class ComposeTweetViewController: UIViewController, UITextViewDelegate {
     @IBAction func onTweetButton(_ sender: Any) {
         TwitterClient.sharedInstance.sendTweet(text: newTweetTextView.text, success: { (newTweet: Tweet) -> () in
             self.newTweet = newTweet
-            print("HERE")
             self.delegate?.addNewTweet(tweet: self.newTweet!)
         }) { (error: Error) in
             print(error.localizedDescription)
@@ -53,6 +53,7 @@ class ComposeTweetViewController: UIViewController, UITextViewDelegate {
         super.viewDidLoad()
         newTweetTextView.delegate = self
         newTweetTextView.becomeFirstResponder()
+        newTweetView.loadUserData()
         // Do any additional setup after loading the view.
     }
 

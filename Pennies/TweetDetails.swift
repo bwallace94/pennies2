@@ -17,6 +17,7 @@ class TweetDetails: UIView {
     @IBOutlet weak var timestampLabel: UILabel!
     @IBOutlet weak var retweetNumberLabel: UILabel!
     @IBOutlet weak var favoritesNumberLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
 
     var tweetDetails:Tweet! {
         didSet {
@@ -29,6 +30,16 @@ class TweetDetails: UIView {
             let formatter = DateFormatter()
             formatter.dateFormat = "MM/dd/yyyy, hh:mm a"
             timestampLabel.text = formatter.string(from: tweetDetails.timestamp!)
+        }
+    }
+    
+    var tweetUpdatedDetails: Tweet! {
+        didSet {
+            retweetNumberLabel.text = ("\(tweetUpdatedDetails.retweetCount)")
+            favoritesNumberLabel.text = ("\(tweetUpdatedDetails.favoriteCount)")
+            if tweetUpdatedDetails.favorited {
+                favoriteButton.setImage(#imageLiteral(resourceName: "like-action-on"), for: .normal)
+            }
         }
     }
 }

@@ -39,8 +39,33 @@ class TweetDetailsViewController: UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "profileSegue" {
+            let vc = segue.destination as! ProfileViewController
+            vc.userID = tweetInfo.user_id
+        }
+    }
+    
+    func onTapProfileImageView(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "profileSegue", sender: self)
+    }
+    
     func sendTweetView(tweet: Tweet) {
         tweetView.tweetDetails = tweetInfo
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector (onTapProfileImageView(_:)))
+        tweetView.userProfilePictureImageView.addGestureRecognizer(tapGesture)
+    }
+    
+    func sendUpdatedTweetView(tweet: Tweet) {
+        tweetView.tweetUpdatedDetails = tweet
+    }
+    
+    func getUpdatedStats() {
+        TwitterClient.sharedInstance.getTweetByID(tweetID: tweetInfo.id!, success: { (tweet: Tweet) in
+            self.sendUpdatedTweetView(tweet: tweet)
+        }) { (error: Error) in
+            print(error.localizedDescription)
+        }
     }
     
     override func viewDidLoad() {
@@ -49,7 +74,7 @@ class TweetDetailsViewController: UIViewController {
             self.favoriteButton.setImage(#imageLiteral(resourceName: "like-action-on"), for: .normal)
         }
         sendTweetView(tweet: tweetInfo)
-        print(tweetInfo.favorited)
+        getUpdatedStats()
     }
 
     override func didReceiveMemoryWarning() {

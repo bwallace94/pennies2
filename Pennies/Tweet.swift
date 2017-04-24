@@ -17,7 +17,8 @@ class Tweet: NSObject {
     var retweetCount: Int = 0
     var favoriteCount: Int = 0
     var timestamp: Date?
-    var id: String?
+    var id: String!
+    var user_id: String!
     var favorited: Bool!
     
     init(dict: NSDictionary) {
@@ -25,6 +26,7 @@ class Tweet: NSObject {
         if let user = user {
             name = user["name"] as? String
             screenname = user["screen_name"] as? String
+            user_id = user["id_str"] as? String
             let urlString = user["profile_image_url_https"] as? String
             if let urlString = urlString {
                 profilePictureUrl = URL(string: urlString)
@@ -33,7 +35,7 @@ class Tweet: NSObject {
         text = dict["text"] as? String
         retweetCount = (dict["retweet_count"] as? Int) ?? 0
         favoriteCount = (dict["favorite_count"] as? Int) ?? 0
-        if dict["true"] != nil {
+        if dict["favorited"] != nil {
             favorited = true
         } else {
             favorited = false

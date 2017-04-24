@@ -63,6 +63,28 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func userTimeline(userID: String!, success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+        var parameters = [String: String]()
+        parameters["user_id"] = userID
+        get("1.1/statuses/user_timeline.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
+            let dicts = response as! [NSDictionary]
+            let tweets = Tweet.tweetsWithArray(dicts: dicts)
+            success(tweets)
+        }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
+            failure(error)
+        })
+    }
+    
+    func mentionsTimeline(success: @escaping ([Tweet]) -> (), failure: @escaping (Error) -> ()) {
+        get("1.1/statuses/mentions_timeline.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
+            let dicts = response as! [NSDictionary]
+            let tweets = Tweet.tweetsWithArray(dicts: dicts)
+            success(tweets)
+        }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
+            failure(error)
+        })
+    }
+    
     func currentAccount(success: @escaping (User) -> (), failure: @escaping (Error) -> ()) {
         get("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
             let userDict = response as! NSDictionary
@@ -71,6 +93,31 @@ class TwitterClient: BDBOAuth1SessionManager {
         }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
             failure(error)
         })
+    }
+    
+    func userAccount(userID: String!, success: @escaping (User) -> (), failure: @escaping (Error) -> ()) {
+        var parameters = [String: String]()
+        parameters["user_id"] = userID
+        get("1.1/users/show.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) -> Void in
+            let userDict = response as! NSDictionary
+            let user = User(dict: userDict)
+            success(user)
+        }, failure: { (task: URLSessionDataTask?, error: Error) -> Void in
+            failure(error)
+        })
+    }
+    
+    func getTweetByID(tweetID: String!, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()) {
+        var parameters = [String: String]()
+        parameters["id"] = tweetID
+        get("1.1/statuses/show.json", parameters: parameters, progress: nil, success: { (task: URLSessionDataTask, response: Any?) in
+            let dictionary = response as! NSDictionary
+            let tweet = Tweet(dict: dictionary)
+            success(tweet)
+        }) { (task: URLSessionDataTask?, error: Error) in
+            print("ERROR SENDING TWEET")
+            failure(error)
+        }
     }
     
     func sendTweet(text: String!, success: @escaping (Tweet) -> (), failure: @escaping (Error) -> ()) {

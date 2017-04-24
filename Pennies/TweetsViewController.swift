@@ -11,6 +11,9 @@ import UIKit
 class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeTweetProtocol {
     
     var tweets: [Tweet]! = []
+    var sendUserID = ""
+    var mentions = false
+    var home = true
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -21,6 +24,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         cell.tweetInfo = tweets[indexPath.row]
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector (onTapProfileImageView(_:)))
+        cell.userProfilePictureImageView.isUserInteractionEnabled = true
+        cell.userProfilePictureImageView.addGestureRecognizer(tapGesture)
+        cell.userProfilePictureImageView.tag = indexPath.row
         return cell
     }
     
@@ -41,21 +48,39 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func addNewTweet(tweet newTweet: Tweet) {
         tweets = [newTweet] + tweets
-        print("HERE2")
         tableView.reloadData()
+    }
+    
+    func onTapProfileImageView(_ sender: UITapGestureRecognizer) {
+        let profileImage = sender.view as! UIImageView
+        let row = profileImage.tag
+        sendUserID = tweets[row].user_id!
+        performSegue(withIdentifier: "profileSegue", sender: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.estimatedRowHeight = 100.0
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_refreshControl:)), for: UIControlEvents.valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
-        TwitterClient.sharedInstance.homeTimeline(success: { (tweets: [Tweet]) -> () in
-            self.tweets = tweets
-            self.tableView.reloadData()
-        }, failure: { (error: Error) -> () in
-            print(error.localizedDescription)
-        })
+        if mentions {
+            TwitterClient.sharedInstance.mentionsTimeline(success: { (tweets:[Tweet]) in
+                self.navigationController?.navigationBar.topItem?.title = "Mentions"
+                self.tweets = tweets
+                self.tableView.reloadData()
+            }, failure: { (error: Error) in
+                print(error.localizedDescription)
+            })
+        } else {
+            TwitterClient.sharedInstance.homeTimeline(success: { (tweets: [Tweet]) -> () in
+                self.tweets = tweets
+                self.tableView.reloadData()
+            }, failure: { (error: Error) -> () in
+                print(error.localizedDescription)
+            })
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
         TwitterClient.sharedInstance.currentAccount(success: { (user: User) in
@@ -75,7 +100,10 @@ class TweetsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let navController = segue.destination as! UINavigationController
             let vc = navController.childViewControllers.first as! ComposeTweetViewController
             vc.delegate = self
-            
+        }
+        if segue.identifier == "profileSegue" {
+            let vc = segue.destination as! ProfileViewController
+            vc.userID = sendUserID
         }
     }
 
